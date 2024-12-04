@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:29:45 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/04 14:39:43 by juhanse          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:51:35 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int		ft_recursive_power(int nb, int power);
 
 void	send_message(int pid, char *message);
 
+char	*letter_tosting(const char *s, const char letter);
 void	signal_handler(int signum);
 
 #endif
