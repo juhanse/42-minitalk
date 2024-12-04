@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 14:21:34 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/04 14:25:25 by juhanse          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:39:35 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ char	*ft_strdup(char *s)
 		buffer[i] = s[i];
 	buffer[i] = '\0';
 	return (buffer);
+}
+
+int	ft_recursive_power(int nb, int power)
+{
+	int	result;
+
+	if (power == 0)
+		return (1);
+	else if (power < 0)
+		return (0);
+	else
+	{
+		res = nb * ft_recursive_power(nb, power - 1);
+		return (res);
+	}
 }
