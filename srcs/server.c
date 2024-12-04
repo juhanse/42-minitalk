@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/04 15:59:28 by juhanse          ###   ########.fr       */
+/*   Updated: 2024/12/04 16:03:38 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*letter_tosting(const char *s, const char letter)
 		tmp[j++] = s[i++];
 	tmp[j++] = letter;
 	tmp[j] = '\0';
-	free(s);
+	free ((void *)s);
 	return (tmp);
 }
 
