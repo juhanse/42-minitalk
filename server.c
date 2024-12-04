@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/04 15:48:32 by juhanse          ###   ########.fr       */
+/*   Updated: 2024/12/04 15:54:47 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,21 @@ void	signal_handler(int signum)
 		result = ft_strdup("");
 	if (signum == SIGUSR1)
 		char_result += 0;
+	else if (signum == SIGUSR2)
+		char_result += (1 * ft_recursive_power(2, 7 - bits));
+	bits++;
+	if (bits == 8)
+	{
+		result = letter_tosting(result, char_result);
+		if (char_result == '\0')
+		{
+			printf("%s\n", result);
+			result = NULL;
+		}
+		bits = 0;
+		char_result = 0;
+		len += 1;
+	}
 }
 
 char	*letter_tosting(const char *s, const char letter)
