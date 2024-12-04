@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:29:45 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/03 23:33:06 by juhanse          ###   ########.fr       */
+/*   Updated: 2024/12/04 14:26:04 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,12 @@
 # include <stdlib.h>
 # include <stdio.h>
 # include <string.h>
+
+size_t	ft_strlen(char *s);
+char	*ft_strdup(char *s);
+
+void	send_message(int pid, char *message);
+
+void	signal_handler(int signum);
 
 #endif
