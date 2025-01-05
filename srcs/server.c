@@ -6,11 +6,18 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2024/12/04 16:03:38 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/06 00:36:56 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
+
+void	sigint_handler(int sig_num)
+{
+	(void)sig_num;
+	ft_printf("Received SIGINT signal, exiting...\n");
+	exit(EXIT_SUCCESS);
+}
 
 void	signal_handler(int signum)
 {
