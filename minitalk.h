@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:29:45 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/06 00:53:40 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/06 01:24:19 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@
 # include <stdarg.h>
 
 int	ft_printf(const char *s, ...);
+int	ft_atoi(const char *str);
 
 #endif

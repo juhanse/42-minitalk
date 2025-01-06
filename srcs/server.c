@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/06 00:36:56 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/06 01:35:17 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,63 +19,37 @@ void	sigint_handler(int sig_num)
 	exit(EXIT_SUCCESS);
 }
 
-void	signal_handler(int signum)
+void	handle_signal(int signum, siginfo_t *info, void *context)
 {
-	static int	bits;
-	static int	char_result;
-	static int	len;
-	static char	*result;
+	int			client_pid;
+	static int	bit_count = 0;
+	static char	current_char = 0;
 
-	if (!result)
-		result = ft_strdup("");
+	(void)context;
+	client_pid = info->si_pid;
 	if (signum == SIGUSR1)
-		char_result += 0;
-	else if (signum == SIGUSR2)
-		char_result += (1 * ft_recursive_power(2, 7 - bits));
-	bits++;
-	if (bits == 8)
+		current_char |= (1 << bit_count);
+	bit_count++;
+	if (bit_count == 8)
 	{
-		result = letter_tosting(result, char_result);
-		if (char_result == '\0')
-		{
-			printf("%s\n", result);
-			result = NULL;
-		}
-		bits = 0;
-		char_result = 0;
-		len += 1;
+		write(1, &current_char, 1);
+		bit_count = 0;
+		current_char = 0;
 	}
-}
-
-char	*letter_tosting(const char *s, const char letter)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	j = 0;
-	tmp = (char *)malloc((ft_strlen(s) + 2) * sizeof(char));
-	if (!tmp)
-		return (NULL);
-	while (s[i])
-		tmp[j++] = s[i++];
-	tmp[j++] = letter;
-	tmp[j] = '\0';
-	free ((void *)s);
-	return (tmp);
+	kill(client_pid, SIGUSR1);
 }
 
 int	main(void)
 {
 	struct sigaction	action;
 
-	printf("%d", getpid());
-	action.sa_handler = signal_handler;
-	action.sa_flags = 0;
+	ft_printf("Server PID: %d\n", getpid());
+	action.sa_flags = SA_SIGINFO;
+	action.sa_sigaction = handle_signal;
 	sigemptyset(&action.sa_mask);
 	sigaction(SIGUSR1, &action, NULL);
 	sigaction(SIGUSR2, &action, NULL);
+	signal(SIGINT, sigint_handler);
 	while (1)
 	{
 		pause();
