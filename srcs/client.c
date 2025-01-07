@@ -6,36 +6,31 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:23 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 12:22:59 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/07 15:29:25 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	send(int pid, char *msg)
+void	send_msg(int pid, char *s, size_t len)
 {
-	int	bit;
-	int	letter;
+	int		bit;
+	size_t	i;
 
-	letter = 0;
-	while (msg[letter])
+	i = 0;
+	while (i <= len)
 	{
-		bit = -1;
-		while (++bit < 8)
+		bit = 0;
+		while (bit < 7)
 		{
-			if (((unsigned char)(msg[letter] >> (7 - bit)) & 1) == 0)
-				kill(pid, SIGUSR1);
-			else if (((unsigned char)(msg[letter] >> (7 - bit)) & 1) == 1)
+			if ((s[i] >> bit) & 1)
 				kill(pid, SIGUSR2);
-			usleep(50);
+			else
+				kill(pid, SIGUSR1);
+			bit++;
+			usleep(300);
 		}
-		letter++;
-	}
-	bit = 0;
-	while (bit++ < 8)
-	{
-		kill(pid, SIGUSR1);
-		usleep(50);
+		i++;
 	}
 }
 
@@ -49,11 +44,6 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	pid = ft_atoi(argv[1]);
-	if (kill(pid, 0) < 0)
-	{
-		ft_printf("ERROR: Failed to send signal to PID: %d\n", pid);
-		return (0);
-	}
-	send(pid, argv[2]);
+	send_msg(pid, argv[2], ft_strlen(argv[2]));
 	return (0);
 }
