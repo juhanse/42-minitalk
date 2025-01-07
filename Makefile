@@ -6,7 +6,7 @@
 #    By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/04 15:56:02 by juhanse           #+#    #+#              #
-#    Updated: 2025/01/06 01:36:49 by juhanse          ###   ########.fr        #
+#    Updated: 2025/01/07 12:00:47 by juhanse          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ CLIENT = client
 SERVER = server
 HEADER = minitalk.h
 
-SRCS_CLIENT = srcs/client.c srcs/utils.c
-SRCS_SERVER = srcs/server.c srcs/utils.c
+SRCS_CLIENT = srcs/client.c lib/ft_atoi.c lib/ft_printf.c
+SRCS_SERVER = srcs/server.c lib/ft_atoi.c lib/ft_printf.c
 
 OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 OBJS_SERVER = $(SRCS_SERVER:.c=.o)
