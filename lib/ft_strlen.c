@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 23:29:45 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 15:28:57 by juhanse          ###   ########.fr       */
+/*   Created: 2025/01/07 15:27:50 by juhanse           #+#    #+#             */
+/*   Updated: 2025/01/07 15:28:46 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../minitalk.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <signal.h>
-# include <stdarg.h>
+size_t	ft_strlen(char *s)
+{
+	size_t i;
 
-size_t	ft_strlen(char *s);
-int		ft_printf(const char *s, ...);
-int		ft_atoi(const char *str);
-
-#endif
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
