@@ -6,44 +6,41 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:23 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 15:29:25 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:20:43 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	send_msg(int pid, char *s, size_t len)
+void	ft_send_bits(int pid, char c)
 {
-	int		bit;
-	size_t	i;
+	int	bit;
 
-	i = 0;
-	while (i <= len)
+	bit = 0;
+	while (bit < 8)
 	{
-		bit = 0;
-		while (bit < 7)
-		{
-			if ((s[i] >> bit) & 1)
-				kill(pid, SIGUSR2);
-			else
-				kill(pid, SIGUSR1);
-			bit++;
-			usleep(300);
-		}
-		i++;
+		if ((c & (0x01 << bit)) != 0)
+			kill(pid, SIGUSR1);
+		else
+			kill(pid, SIGUSR2);
+		usleep(100);
+		bit++;
 	}
 }
 
 int	main(int argc, char **argv)
 {
+	int	i;
 	int	pid;
 
 	if (argc != 3)
-	{
-		ft_printf("Usage: ./client [Server PID] [String to send]\n");
-		return (0);
-	}
+		ft_error("Usage: <PID> <message>");
+	i = -1;
 	pid = ft_atoi(argv[1]);
-	send_msg(pid, argv[2], ft_strlen(argv[2]));
+	if (pid < 2)
+		ft_error("Invalid <PID>");
+	while (argv[2][++i])
+		ft_send_bits(pid, argv[2][i]);
+	ft_send_bits(pid, '\n');
 	return (0);
 }
