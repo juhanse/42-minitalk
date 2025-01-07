@@ -6,37 +6,43 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 12:18:48 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/07 17:29:13 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	receive(int signum)
+void	ft_receive(int signal)
 {
-	static int				i = 0;
-	static unsigned char	c = 0;
+	static int	bit;
+	static int	i;
 
-	if (signum == SIGUSR2)
-		c = c << 1;
-	else if (signum == SIGUSR1)
-		c = (c << 1) | 0b00000001;
-	i++;
-	if (i == 8)
+	if (signal == SIGUSR1)
+		i |= (0x01 << bit);
+	bit++;
+	if (bit == 8)
 	{
-		ft_printf("%c", c);
+		write(1, &i, 1);
+		bit = 0;
 		i = 0;
-		c = 0;
 	}
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	ft_printf("PID: %d\n", getpid());
+	int	pid;
+
+	(void)argv;
+	if (argc != 1)
+		ft_error("Invalid arguments");
+	pid = getpid();
+	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
+	ft_printf("\033[90mWaiting for a message...\033[0m\n");
 	while (1)
 	{
-		signal(SIGUSR1, receive);
-		signal(SIGUSR2, receive);
+		signal(SIGUSR1, ft_receive);
+		signal(SIGUSR2, ft_receive);
+		pause ();
 	}
 	return (0);
 }
