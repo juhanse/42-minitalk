@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 15:27:50 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 15:28:46 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/07 15:35:10 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ size_t	ft_strlen(char *s)
 {
 	size_t i;
 
-	if (!s)
-		return ;
 	i = 0;
+	if (!s)
+		return (i);
 	while (s[i])
 		i++;
 	return (i);
