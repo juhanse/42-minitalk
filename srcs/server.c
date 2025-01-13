@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 17:29:13 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/14 00:03:57 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_receive(int signal)
 {
-	static int	bit;
 	static int	i;
+	static int	bit;
 
 	if (signal == SIGUSR1)
 		i |= (0x01 << bit);
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 		ft_error("Invalid arguments");
 	pid = getpid();
 	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
-	ft_printf("\033[90mWaiting for a message...\033[0m\n");
+	ft_printf("Waiting for a message...\n");
 	while (1)
 	{
 		signal(SIGUSR1, ft_receive);
