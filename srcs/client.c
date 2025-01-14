@@ -6,41 +6,44 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:23 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 17:20:43 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/14 20:39:47 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minitalk.h"
 
-void	ft_send_bits(int pid, char c)
+void	send_message(int pid, char *s)
 {
+	int	i;
 	int	bit;
 
-	bit = 0;
-	while (bit < 8)
+	i = -1;
+	if (!s)
+		return ;
+	while (s[++i])
 	{
-		if ((c & (0x01 << bit)) != 0)
-			kill(pid, SIGUSR1);
-		else
-			kill(pid, SIGUSR2);
-		usleep(100);
-		bit++;
+		bit = -1;
+		while (++bit < 8)
+		{
+			if ((s[i] >> bit) & 1)
+				kill(pid, SIGUSR1);
+			else
+				kill(pid, SIGUSR2);
+			usleep(100);
+		}
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	int	i;
 	int	pid;
 
 	if (argc != 3)
 		ft_error("Usage: <PID> <message>");
-	i = -1;
 	pid = ft_atoi(argv[1]);
 	if (pid < 2)
 		ft_error("Invalid <PID>");
-	while (argv[2][++i])
-		ft_send_bits(pid, argv[2][i]);
-	ft_send_bits(pid, '\n');
+	send_message(pid, argv[2]);
+	send_message(pid, "\n");
 	return (0);
 }
