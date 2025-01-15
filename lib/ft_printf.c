@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 11:57:38 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/07 16:57:15 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/15 16:52:52 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	ft_putnbr(int nb, int count)
 
 int	ft_printf(const char *s, ...)
 {
-	int	i;
-	int	count;
-	va_list args;
+	int		i;
+	int		count;
+	va_list	args;
 
 	i = -1;
 	count = 0;
