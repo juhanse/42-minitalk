@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/14 20:40:20 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/15 16:52:39 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	signal_handler(int signal)
 	static char	current;
 
 	if (signal == SIGUSR1)
-		current |= (1 << bit);
+		current |= (0x01 << bit);
 	bit++;
 	if (bit == 8)
 	{
@@ -38,7 +38,7 @@ int	main(int argc, char **argv)
 	pid = getpid();
 	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
 	ft_printf("Waiting for a message...\n");
-    while (1)
+	while (1)
 	{
 		signal(SIGUSR1, signal_handler);
 		signal(SIGUSR2, signal_handler);
