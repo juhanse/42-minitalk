@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/15 16:52:39 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/16 16:13:47 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ int	main(int argc, char **argv)
 
 	(void)argv;
 	if (argc != 1)
-		ft_error("Invalid arguments");
+	{
+		printf("Invalid arguments");
+		return (0);
+	}
 	pid = getpid();
 	ft_printf("\033[94mPID\033[0m \033[96m->\033[0m %d\n", pid);
 	ft_printf("Waiting for a message...\n");
