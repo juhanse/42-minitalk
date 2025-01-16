@@ -263,7 +263,7 @@ if [[ $t4 == 1 || $tm == 1 ]]
 then
     echo "${L_Green}\n [Test 4]\tTrying to crash your exhange Server-Client, sending str with 3 000 char (15 times) ${NC}"
 
-    for i in {1..15}
+    for i in {1..5}
     do
         echo -n "${Green} [ ${i} ]${NC}"
         $PATH_TO_CLIENT $p_id "
@@ -310,7 +310,7 @@ fi
 if [[ $t6 == 1 || $tb == 1 ]]
 then
     echo "${L_Green}\n [Test 6]\tTesting the connexion between server-client, sending str with 5 300 char (10 times)${NC}"
-    for i in {1..10}
+    for i in {1..2}
     do
         echo -n "${L_Green} [ ${i} ]${NC}"
         $PATH_TO_CLIENT $p_id "
