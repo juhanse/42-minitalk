@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.s19.be>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:23 by juhanse           #+#    #+#             */
-/*   Updated: 2025/01/16 16:13:36 by juhanse          ###   ########.fr       */
+/*   Updated: 2025/01/17 21:00:57 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ int	main(int argc, char **argv)
 
 	if (argc != 3)
 	{
-		printf("Usage: <PID> <message>");
+		ft_printf("Usage: <PID> <message>");
 		return (0);
 	}
 	pid = ft_atoi(argv[1]);
 	if (pid < 2)
 	{
-		printf("Invalid: <PID>");
+		ft_printf("Invalid: <PID>");
 		return (0);
 	}
 	send_message(pid, argv[2]);
