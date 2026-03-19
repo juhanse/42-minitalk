@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:23 by juhanse           #+#    #+#             */
-/*   Updated: 2026/03/19 15:57:38 by juhanse          ###   ########.fr       */
+/*   Updated: 2026/03/20 00:12:03 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	send_char(int pid, char c)
 	while (++bit < 8)
 	{
 		g_server_ready = 0;
+		usleep(10);
 		if ((c >> bit) & 1)
 			kill(pid, SIGUSR1);
 		else
@@ -66,7 +67,6 @@ int	main(int argc, char **argv)
 	}
 	signal(SIGUSR1, ack_handler);
 	send_message(pid, argv[2]);
-	while (1)
-		pause();
+	ft_printf("Message successfully received by the server!\n");
 	return (0);
 }
