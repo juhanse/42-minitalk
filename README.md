@@ -36,12 +36,11 @@ make bonus  # Compiles bonus files (ACK & Unicode support)
 
 
 # 📚 Resources
-### Documentation & References
+### References
 * Unix Signals: `man signal`, `man sigaction`, `man kill`.
 * Bitwise Operations: [C Bitwise Operators Guide](https://www.tutorialspoint.com/cprogramming/c_bitwise_operators.htm).
 * UTF-8 Encoding: Understanding how multi-byte characters are structured in memory.
 
-### AI Usage Disclosure
-Generative AI (Gemini/ChatGPT) was utilized for the following tasks:
+### AI was used to:
 * Code Logic: Clarifying the use of `siginfo_t` to retrieve the client's PID for acknowledgments.
 * Debugging: Troubleshooting "Race Conditions" and signal loss on macOS/Linux environments.
