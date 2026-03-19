@@ -6,7 +6,7 @@
 /*   By: juhanse <juhanse@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 23:30:31 by juhanse           #+#    #+#             */
-/*   Updated: 2026/03/19 16:02:34 by juhanse          ###   ########.fr       */
+/*   Updated: 2026/03/20 00:18:38 by juhanse          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
-	static int	bit;
-	static char	current;
+	static int		bit = 0;
+	static char		current = 0;
+	static pid_t	client_pid = 0;
 
 	(void)context;
-	bit = 0;
-	current = 0;
+	if (info->si_pid != 0 && info->si_pid != client_pid)
+	{
+		bit = 0;
+		current = 0;
+		client_pid = info->si_pid;
+	}
 	if (sig == SIGUSR1)
 		current |= (0x01 << bit);
 	bit++;
@@ -31,7 +36,8 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		bit = 0;
 		current = 0;
 	}
-	kill(info->si_pid, SIGUSR1);
+	if (client_pid != 0)
+		kill(client_pid, SIGUSR1);
 }
 
 int	main(int argc, char **argv)
@@ -48,6 +54,8 @@ int	main(int argc, char **argv)
 	ft_printf("Waiting for a message...\n");
 	sa.sa_sigaction = signal_handler;
 	sigemptyset(&sa.sa_mask);
+	sigaddset(&sa.sa_mask, SIGUSR1);
+	sigaddset(&sa.sa_mask, SIGUSR2);
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
